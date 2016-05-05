@@ -1,0 +1,12 @@
+{
+  "name": "labsRadio",
+  "version": "1.0.0",
+  "description": "Radio continua baseado nas urls que inputamos",
+  "author": "Alex Ayub",
+  "license": "My egg",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mysql": "^2.9.0"
+  }
+}
