@@ -46,7 +46,7 @@ function Musica() {
 
   this.create = function(musica, res) {
     connection.acquire(function(err, con) {
-      con.query('insert into musicas values (0,?,?,?,?,?)', [musica.idsala,musica.idusuario,musica.titulo, musica.idgenero, musica.url], function(err, result) {
+      con.query('insert into musicas values (0,?,?,?,?,?)', [musica.idsala,musica.idusuario,musica.idgenero,musica.titulo,musica.url], function(err, result) {
         con.release();
         if (err) {
           res.send({status: 1, message: 'Musica creation failed.' + err.message});
