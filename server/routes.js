@@ -19,6 +19,10 @@ module.exports = {
       musica.getMusicasPorUsuario(req.params.id,res);
     });
 
+    app.get('/musicas/:id/sala', function(req, res) {
+      musica.getMusicasPorSala(req.params.id,res);
+    });
+
     app.post('/musicas/', function(req, res) {
       musica.create(req.body, res);
     });

@@ -33,7 +33,7 @@ function onYouTubeIframeAPIReady() {
         videoId: firstVideo,
         playerVars: {
             color: 'yellow',
-            loop: 1,
+            loop: 5,
             playlist: urlPlayList
         },
         events: {
@@ -106,7 +106,6 @@ $('#pause').on('click', function () {
 
 
 // Sound volume
-
 $('#mute-toggle').on('click', function() {
     var mute_toggle = $(this);
 
