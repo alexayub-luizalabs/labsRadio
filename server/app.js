@@ -2,6 +2,7 @@ var express = require('express');
 var bodyparser = require('body-parser');
 var connection = require('./connection');
 var routes = require('./routes');
+var config = require('./config');
 
 var app = express();
 app.use(express.static('../public'));
@@ -17,6 +18,6 @@ app.all('*', function(req, res, next) {
 connection.init();
 routes.configure(app);
 
-var server = app.listen(8080, function() {
+var server = app.listen(config.port, function() {
   console.log('Server listening on port ' + server.address().port);
 });
