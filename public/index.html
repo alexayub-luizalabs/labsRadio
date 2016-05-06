@@ -13,7 +13,7 @@
 
 <body ng-controller="radioController">
     <input type="hidden" id="txtFirst" value="{{firstToRun}}">
-    <input type="hidden" id="txtList" value="{{lista}}">
+    <input type="button" id="btnApagaAtual" ng-click="apagarMusicaAtual()">
 </body>
 
 
@@ -26,8 +26,7 @@
     time_update_interval = 0;
 
 function onYouTubeIframeAPIReady() {
-
-    var urlPlayList = document.getElementById('txtList').value;
+    
     var firstVideo = document.getElementById('txtFirst').value;
 
     player = new YT.Player('video-placeholder', {
@@ -36,8 +35,7 @@ function onYouTubeIframeAPIReady() {
         videoId: firstVideo,
         playerVars: {
             color: 'yellow',
-            loop: 5,
-            playlist: urlPlayList
+            loop: 5
         },
         events: {
             onReady: initialize
@@ -74,25 +72,14 @@ function updateTimerDisplay(){
     $('#duration').text(formatTime( player.getDuration() ));
 
     //se acabou o video
-    if(formatTime( player.getCurrentTime()) == formatTime( player.getDuration())) {
-        
-        var jqxhr = $.ajax({
-            url: 'http://192.168.50.36:8080/musicas/' + player.getVideoUrl().split('=')[1],
-            method: 'delete'
-        });
-        jqxhr.done(function () {
-            
-           var jqxhr_1 = $.ajax({
-                url: 'http://192.168.50.36:8080/musicas/',
-                method: 'GET'
-            });
-            jqxhr_1.done(function() {
-                player.player.loadVideoByUrl("Yu0Uk2DHtVw");
-                player.playVideo();
-            })            
-        });
-
-    }
+    if(formatTime( player.getCurrentTime()) == formatTime( player.getDuration())) {        
+        $('#btnApagaAtual').click();
+        if(!firstRun) {
+            setTimeout(function(){ location.reload(); }, 5000);
+        } else {
+            location.reload();
+        }
+    } 
 }
 
 

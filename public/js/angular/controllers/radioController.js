@@ -3,16 +3,12 @@ app.controller('radioController', function($scope,$http,$rootScope){
 
     $http.get(BASE_URL + '/musicas').
     success(function(datamusica) {
-        $scope.musicas = datamusica;
-        $scope.firstToRun = $scope.musicas[0].url;
-
-        var playList = '';
-        for (var i = 1; i < $scope.musicas.length; i++) {
-            playList += ',' + $scope.musicas[i].url;
-        };
-
-        $scope.lista = playList;
-
+        
+        if(datamusica.length > 0) {
+            $scope.musicas = datamusica;        
+            $scope.firstToRun = $scope.musicas[0].url;
+        }
+        
     });
 
     $scope.getMusicas = function(){
@@ -25,6 +21,13 @@ app.controller('radioController', function($scope,$http,$rootScope){
                 alert("Error...");
                 console.log(datamusica);
             });
+    }
+
+    $scope.apagarMusicaAtual = function(){
+        $http.delete(BASE_URL + '/musicas/' + $scope.firstToRun).
+        success(function (datamusica) {
+            console.log('Apagou');
+        });
     }
 
     $scope.getMusicaPorId = function(selecao){
@@ -40,31 +43,6 @@ app.controller('radioController', function($scope,$http,$rootScope){
                 console.log(datamusica);
             });
     }
-
-    $scope.trazRespostasPorQuestao = function(idQuestao){
-        console.log("Questao: " + $rootScope.idQuestao);
-        $http.get(BASE_URL + '/questoes/' + idQuestao + '/respostas').
-            success(function(dataresp){
-                $scope.respostas = dataresp;
-                console.log($scope.respostas);
-            })
-            .error(function(dataresp){
-                alert("Error...");
-                console.log(dataresp);
-            });
-    }
-
-    $scope.responder = function(usuario, idquestao, idresposta){
-        console.log("Questao: " + $scope.idquestao);
-        $http.post(BASE_URL + '/respusers/').
-            success(function(dataresp){
-                $scope.respostas = dataresp;
-                console.log($scope.respostas);
-            })
-            .error(function(dataresp){
-                alert("Error...");
-                console.log(dataresp);
-            });
-    }
+    
 
 });
