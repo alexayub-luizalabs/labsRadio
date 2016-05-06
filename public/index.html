@@ -25,9 +25,11 @@
     var player,
     time_update_interval = 0;
 
-    var firstVideo = document.getElementById('txtFirst').value;
+    var firstVideo = "";
 
 function onYouTubeIframeAPIReady() {
+
+    firstVideo = document.getElementById('txtFirst').value;
 
     player = new YT.Player('video-placeholder', {
         width: 600,
@@ -72,13 +74,14 @@ function updateTimerDisplay(){
     $('#duration').text(formatTime( player.getDuration() ));
 
     //se acabou o video
-    if(formatTime( player.getCurrentTime()) == formatTime( player.getDuration())) {        
-        $('#btnApagaAtual').click();
-        if(!firstVideo) {
-            setTimeout(function(){ location.reload(); }, 5000);
-        } else {
+    if(formatTime( player.getCurrentTime()) == formatTime( player.getDuration())) {                
+        if(formatTime( player.getCurrentTime()) != "0:00" && firstVideo) {
+            $('#btnApagaAtual').click()
             location.reload();
         }
+        else {
+            setTimeout(function(){ location.reload(); }, 5000);
+        }         
     } 
 }
 
