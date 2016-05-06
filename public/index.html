@@ -74,7 +74,7 @@ function updateTimerDisplay(){
     //se acabou o video
     if(formatTime( player.getCurrentTime()) == formatTime( player.getDuration())) {        
         $('#btnApagaAtual').click();
-        if(!firstRun) {
+        if(!firstVideo) {
             setTimeout(function(){ location.reload(); }, 5000);
         } else {
             location.reload();
