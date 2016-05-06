@@ -3,7 +3,7 @@ var connection = require('../connection');
 function Musica() {
   this.get = function(res) {
     connection.acquire(function(err, con) {
-      con.query("select m.idmusica, m.titulo, g.descricao as genero, m.url, u.nome, s.descricao as sala, m.data from musicas m, usuarios u, generos g, salas s where m.idusuario = u.idusuario and g.idgenero = m.idgenero and u.idsala = s.idsala and date_format(m.data,'%d/%m/%Y') = date_format(sysdate(),'%d/%m/%Y')", function(err, result) {
+      con.query("select m.idmusica, m.titulo, g.descricao as genero, m.url, u.nome, s.descricao as sala, m.data from musicas m, usuarios u, generos g, salas s where m.idusuario = u.idusuario and g.idgenero = m.idgenero and u.idsala = s.idsala and date_format(m.data,'%d/%m/%Y') = date_format(sysdate(),'%d/%m/%Y') order by m.idmusica asc", function(err, result) {
         con.release();
         res.send(result);
       });
@@ -29,7 +29,7 @@ function Musica() {
 
   this.getMusicasPorUsuario = function(id, res) {
     connection.acquire(function(err, con) {
-      con.query("select m.idmusica, m.titulo, g.descricao as genero, m.url, u.nome, s.descricao as sala, m.data from musicas m, usuarios u, generos g, salas s where m.idusuario = u.idusuario and g.idgenero = m.idgenero and u.idsala = s.idsala and date_format(m.data,'%d/%m/%Y') = date_format(sysdate(),'%d/%m/%Y') and u.idusuario = ?",[id], function(err, result) {
+      con.query("select m.idmusica, m.titulo, g.descricao as genero, m.url, u.nome, s.descricao as sala, m.data from musicas m, usuarios u, generos g, salas s where m.idusuario = u.idusuario and g.idgenero = m.idgenero and u.idsala = s.idsala and date_format(m.data,'%d/%m/%Y') = date_format(sysdate(),'%d/%m/%Y') and u.idusuario = ? order by m.idmusica asc",[id], function(err, result) {
         con.release();
         if(err) {
           res.send({status: 1, message: 'Musicas não encontradas.'});
@@ -46,7 +46,7 @@ function Musica() {
 
   this.getMusicasPorSala = function(id, res) {
     connection.acquire(function(err, con) {
-      con.query("select m.idmusica, m.titulo, g.descricao as genero, m.url, u.nome, s.descricao as sala, m.data from musicas m, usuarios u, generos g, salas s where m.idusuario = u.idusuario and g.idgenero = m.idgenero and u.idsala = s.idsala and date_format(m.data,'%d/%m/%Y') = date_format(sysdate(),'%d/%m/%Y') and s.idsala = ?",[id], function(err, result) {
+      con.query("select m.idmusica, m.titulo, g.descricao as genero, m.url, u.nome, s.descricao as sala, m.data from musicas m, usuarios u, generos g, salas s where m.idusuario = u.idusuario and g.idgenero = m.idgenero and u.idsala = s.idsala and date_format(m.data,'%d/%m/%Y') = date_format(sysdate(),'%d/%m/%Y') and s.idsala = ? order by m.idmusica asc",[id], function(err, result) {
         con.release();
         if(err) {
           res.send({status: 1, message: 'Musicas não encontradas.'});
