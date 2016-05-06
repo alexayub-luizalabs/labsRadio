@@ -1,12 +1,14 @@
-<html ng-app="app"> 
+<html ng-app="app">
     <head>
-    	<title>Labs</title>
-    	<link rel="stylesheet" href="demo.css" type="text/css">
+        <title>Labs</title>
+        <link rel="stylesheet" href="demo.css" type="text/css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/tomorrow.min.css">
-    	<script src="js/angular/angular.min.js"></script>	
-    	<script src="js/angular/controllers/radioController.js"></script>
+        <script src="js/angular/angular.min.js"></script>
+        <script>var BASE_URL = 'http://localhost:8080'</script>
+        <script src="js/angular/controllers/radioController.js"></script>
+        <!--<script src="js/controllers/radioController.js"></script>-->
     </head>
 
 <body ng-controller="radioController">
@@ -17,13 +19,14 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
-<script src="https://www.youtube.com/iframe_api"></script>	
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-	var player,
+
+    var player,
     time_update_interval = 0;
-    
+
 function onYouTubeIframeAPIReady() {
-    
+
     var urlPlayList = document.getElementById('txtList').value;
     var firstVideo = document.getElementById('txtFirst').value;
 
@@ -175,7 +178,7 @@ $('pre code').each(function(i, block) {
     hljs.highlightBlock(block);
 });
 
-	</script>
+    </script>
 
 
 <div id="video-placeholder"></div>
