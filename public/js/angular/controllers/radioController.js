@@ -7,6 +7,10 @@ app.controller('radioController', function($scope,$http,$rootScope){
         if(datamusica.length > 0) {
             $scope.musicas = datamusica;        
             $scope.firstToRun = $scope.musicas[0].url;
+            $scope.usuario = $scope.musicas[0].nome;
+            $scope.sala = $scope.musicas[0].sala;
+            $scope.genero = $scope.musicas[0].genero;
+            $scope.titulo = $scope.musicas[0].titulo;
         }
         
     });
