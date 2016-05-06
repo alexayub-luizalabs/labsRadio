@@ -4,7 +4,7 @@ var connection = require('./connection');
 var routes = require('./routes');
 
 var app = express();
-app.use(express.static('./public'));
+app.use(express.static('../public'));
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 

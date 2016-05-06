@@ -76,7 +76,7 @@ function Musica() {
   
   this.delete = function(id, res) {
     connection.acquire(function(err, con) {
-      con.query('delete from musicas where idmusica = ?', [id], function(err, result) {
+      con.query('delete from musicas where url = ?', [id], function(err, result) {
         con.release();
         if (err) {
           res.send({status: 1, message: 'Failed to delete'});
